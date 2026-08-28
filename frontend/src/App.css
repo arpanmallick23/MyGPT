@@ -1,0 +1,15 @@
+* {
+    color: var(--text-primary);
+    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    background-color: var(--bg-app);
+    display: flex;
+}
