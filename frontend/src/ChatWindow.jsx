@@ -36,7 +36,7 @@ function ChatWindow() {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/chat", options);
+            const response = await fetch("https://mygpt-b2yj.onrender.com/api/chat", options);
             const res = await response.json();
             console.log(res);
             setReply(res.reply);
@@ -116,7 +116,7 @@ function ChatWindow() {
             const formData = new FormData();
             formData.append("audio", audioBlob, "recording.webm");
 
-            const response = await fetch("http://localhost:8080/api/voice/transcribe", {
+            const response = await fetch("https://mygpt-b2yj.onrender.com/api/voice/transcribe", {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData

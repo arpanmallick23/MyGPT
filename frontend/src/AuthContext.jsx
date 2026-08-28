@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext(null);
 
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://mygpt-b2yj.onrender.com/api";
 
 export function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem("sigmagpt_token") || null);
