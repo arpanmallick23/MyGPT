@@ -1,88 +1,1037 @@
+/* ==========================================================================
+   MyGPT Landing & Authentication Page Styles
+   Unified with MyGPT Design System & CSS Variables (index.css)
+   ========================================================================== */
+
 .authPage {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: inherit;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Subtle background grid pattern aligned with theme */
+.authPage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Main Two-Column Container */
+.authContainer {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+
+/* ==========================================================================
+   LEFT SECTION: BRAND HERO PANEL (~50%)
+   ========================================================================== */
+.authHeroPanel {
+    flex: 1 1 50%;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-app);
+    padding: 4rem 4.5rem;
+    overflow: hidden;
+    border-right: 1px solid var(--border-color);
+    background: var(--bg-sidebar);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.authCard {
-    width: 100%;
-    max-width: 380px;
-    padding: 2.5rem;
-    box-sizing: border-box;
-    background-color: var(--bg-card);
-    border: solid 1px var(--border-color);
-    border-radius: 14px;
-    text-align: center;
+/* Subtle ambient glow orbs aligned with brand accent */
+.ambientOrb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    opacity: 0.18;
+    z-index: 0;
 }
 
-.authCard h1 {
-    font-size: 1.4rem;
-    margin: 0 0 0.4rem 0;
+.orbViolet {
+    top: 20%;
+    left: 10%;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
 }
 
-.authSubtitle {
-    color: var(--text-secondary) !important;
-    font-size: 0.85rem;
-    margin-bottom: 1.5rem;
+.orbBlue {
+    bottom: 20%;
+    right: 10%;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, #38bdf8 0%, transparent 70%);
 }
 
-.authCard form {
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 2.8rem;
 }
 
-.authCard input {
-    width: 100%;
-    box-sizing: border-box;
-    border: solid 1px var(--border-color);
-    background-color: var(--bg-input);
-    color: var(--text-primary);
-    padding: 12px 14px;
-    font-size: 0.85rem;
-    border-radius: 10px;
+/* Brand Badge */
+.brandBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    width: fit-content;
 }
 
-.authCard input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-.authCard button {
-    width: 100%;
-    box-sizing: border-box;
+.brandLogoIcon {
+    width: 28px;
+    height: 28px;
+    background: transparent;
     border: none;
-    background-color: var(--accent-color);
-    color: #fff !important;
-    padding: 12px 14px;
-    font-size: 0.9rem;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.authCard button:disabled {
-    opacity: 0.6;
-    cursor: default;
+.brandLogoImg,
+.brandLogoSvg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0, 192, 255, 0.45));
 }
 
-.authError {
-    color: var(--danger-color) !important;
-    font-size: 0.8rem;
+.brandName {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+/* Hero Typography */
+.heroTypography {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.heroTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
     margin: 0;
 }
 
-.authSwitch {
-    margin-top: 1.2rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary) !important;
+.highlightGradient {
+    color: var(--accent-color);
+    display: inline;
 }
 
-.authSwitch span {
-    color: var(--accent-color) !important;
-    cursor: pointer;
+.heroDescription {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Three Clean Feature Highlights */
+.heroFeatures {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.featureIconWrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.featureText h4 {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.featureText p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.45;
+}
+
+/* ==========================================================================
+   RIGHT SECTION: AUTHENTICATION FORM PANEL (~50%)
+   ========================================================================== */
+.authFormPanel {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    background-color: var(--bg-app);
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.authFormScrollArea {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem 1.8rem 2.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mobileBrandHeader {
+    display: none;
+    margin-bottom: 2rem;
+}
+
+.formInnerContainer {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+/* Tabs switcher */
+.authTabs {
+    display: flex;
+    padding: 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    gap: 4px;
+}
+
+.authTabBtn {
+    flex: 1;
+    padding: 8px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.88rem;
     font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+
+.authTabBtn:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.authTabBtn.active {
+    background: var(--bg-dropdown);
+    color: var(--text-primary);
+    font-weight: 600;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* Header Text */
+.formHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.formTitle {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.formSubtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.45;
+}
+
+/* Error Alert Box */
+.errorAlert {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    color: var(--danger-color);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    animation: fadeIn 0.2s ease;
+}
+
+.errorIcon {
+    color: var(--danger-color);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+/* Form */
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.05rem;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.fieldLabel {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 14px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    pointer-events: none;
+    transition: color 0.15s ease;
+    z-index: 2;
+}
+
+.inputWrapper input {
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0 42px 0 40px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.inputWrapper input::placeholder {
+    color: var(--text-secondary);
+    font-weight: 400;
+    opacity: 0.75;
+}
+
+.inputWrapper input:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--border-color);
+}
+
+.inputWrapper input:focus {
+    border-color: var(--accent-color);
+    background-color: var(--bg-input);
+}
+
+.inputWrapper input:focus + .togglePasswordBtn {
+    color: var(--text-primary);
+}
+
+.inputWrapper:focus-within .inputIcon {
+    color: var(--accent-color);
+}
+
+.togglePasswordBtn {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease;
+    z-index: 2;
+}
+
+.togglePasswordBtn:hover {
+    color: var(--text-primary);
+}
+
+/* Password Strength Indicator */
+.passwordStrength {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+}
+
+.strengthBars {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+
+.strengthBar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.strengthBar.strength-weak {
+    background: #ef4444;
+    border-color: #ef4444;
+}
+
+.strengthBar.strength-fair {
+    background: #f59e0b;
+    border-color: #f59e0b;
+}
+
+.strengthBar.strength-good {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.strengthBar.strength-strong {
+    background: #10b981;
+    border-color: #10b981;
+}
+
+.strengthMeta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.strengthLabel.strength-weak {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+.strengthLabel.strength-fair {
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.strengthLabel.strength-good {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.strengthLabel.strength-strong {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* Form Options (Remember Me) */
+.formOptions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -0.1rem;
+}
+
+.checkboxContainer {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.checkboxContainer input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.customCheckmark {
+    width: 17px;
+    height: 17px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.checkboxContainer:hover input ~ .customCheckmark {
+    border-color: var(--accent-color);
+    background: var(--bg-hover);
+}
+
+.checkboxContainer input:checked ~ .customCheckmark {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.checkboxContainer input:checked ~ .customCheckmark::after {
+    content: '';
+    width: 4px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-0.5px, -1px);
+}
+
+.checkboxLabel {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+/* Primary Submit Button */
+.primaryAuthBtn {
+    margin-top: 0.3rem;
+    width: 100%;
+    height: 44px;
+    padding: 0 18px;
+    background: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.primaryAuthBtn:hover:not(:disabled) {
+    opacity: 0.92;
+}
+
+.primaryAuthBtn:active:not(:disabled) {
+    opacity: 0.85;
+}
+
+.primaryAuthBtn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.btnTextContent,
+.btnLoadingContent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #ffffff;
+}
+
+.btnTextContent i {
+    font-size: 0.8rem;
+    transition: transform 0.15s ease;
+}
+
+.primaryAuthBtn:hover .btnTextContent i {
+    transform: translateX(3px);
+}
+
+/* Switch Mode Prompt */
+.authFooter {
+    text-align: center;
+    padding-top: 0.1rem;
+}
+
+.switchText {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.switchPromptBtn {
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+}
+
+.switchPromptBtn:hover {
+    background-color: var(--bg-hover);
+}
+
+.switchPromptLabel {
+    color: var(--text-secondary);
+    transition: color 0.15s ease;
+}
+
+.switchPromptBtn:hover .switchPromptLabel {
+    color: var(--text-primary);
+}
+
+.switchLink {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-weight: 600;
+    padding: 0;
+    font-size: 0.85rem;
+    font-family: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.switchPromptBtn:hover .switchLink {
+    text-decoration: underline;
+    opacity: 0.95;
+}
+
+/* ==========================================================================
+   GLOBAL FOOTER: Clean Three-Column Compact SaaS Design
+   ========================================================================== */
+.authGlobalFooter {
+    flex-shrink: 0;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    padding: 1.1rem 2.5rem 0.85rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    box-sizing: border-box;
+    background: var(--bg-card);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* 3-Column Layout */
+.footerThreeColumns {
+    display: grid;
+    grid-template-columns: 1.3fr 1.2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.footerCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.footerColTitle {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+}
+
+/* Column 1: Brand */
+.footerColBrand {
+    gap: 0.3rem;
+}
+
+.footerBrandHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footerBrandMark {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footerBrandMark .brandLogoImg,
+.footerBrandMark .brandLogoSvg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(0, 192, 255, 0.45));
+}
+
+.footerBrandName {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.footerTagline {
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.footerDesc {
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Column 2: Explore */
+.footerColExplore {
+    gap: 0.2rem;
+}
+
+.footerLinksList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+}
+
+.footerColLink {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.75rem;
+    font-family: inherit;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.15s ease;
+}
+
+.footerColLink:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+/* Column 3: Connect */
+.footerColConnect {
+    gap: 0.2rem;
+}
+
+.footerSocialIconsGrid {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.socialIconBtn {
+    width: 27px;
+    height: 27px;
+    border-radius: 6px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.socialIconBtn.active {
+    cursor: pointer;
+}
+
+.socialIconBtn.active:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+    border-color: var(--accent-color);
+}
+
+.socialIconBtn.placeholder {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.socialIconBtn.placeholder:hover {
+    opacity: 0.75;
+    border-color: var(--border-color);
+}
+
+/* Bottom Bar */
+.footerBottomBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.copyrightText {
+    letter-spacing: -0.01em;
+}
+
+.madeWithCare {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   MODAL FOR INFORMATIONAL / LEGAL LINKS
+   ========================================================================== */
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+    animation: fadeIn 0.15s ease;
+}
+
+.modalCard {
+    background: var(--bg-dropdown);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0px 10px 28px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    animation: modalPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    color: var(--text-primary);
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-card);
+}
+
+.modalHeader h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modalCloseBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.modalCloseBtn:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.modalBody {
+    padding: 1.25rem;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.85rem 1.25rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-card);
+}
+
+.modalPrimaryBtn {
+    background: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.modalPrimaryBtn:hover {
+    opacity: 0.9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.97) translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+@media (max-width: 960px) {
+    .authContainer {
+        flex-direction: column;
+    }
+
+    .authHeroPanel {
+        display: none;
+    }
+
+    .mobileBrandHeader {
+        display: flex;
+        justify-content: center;
+    }
+
+    .authFormPanel {
+        flex: 1 1 100%;
+        min-height: 100vh;
+    }
+
+    .authFormScrollArea {
+        padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .formInnerContainer {
+        max-width: 380px;
+    }
+
+    .authGlobalFooter {
+        padding: 1.2rem 1.5rem 0.9rem 1.5rem;
+        gap: 1rem;
+    }
+
+    .footerThreeColumns {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+        text-align: left;
+    }
+
+    .footerLinksList {
+        gap: 0.4rem 1rem;
+    }
+
+    .footerSocialIconsGrid {
+        justify-content: flex-start;
+    }
+
+    .footerBottomBar {
+        flex-direction: column;
+        gap: 0.35rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 961px) and (max-width: 1200px) {
+    .authHeroPanel {
+        padding: 3rem 2.5rem;
+    }
+
+    .heroTitle {
+        font-size: 2.1rem;
+    }
+
+    .authFormScrollArea {
+        padding: 2.5rem 2rem 1.5rem 2rem;
+    }
+
+    .authGlobalFooter {
+        padding: 1rem 1.8rem 0.75rem 1.8rem;
+    }
+
+    .footerThreeColumns {
+        grid-template-columns: 1.2fr 1.2fr 1fr;
+        gap: 1rem;
+    }
 }

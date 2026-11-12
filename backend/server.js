@@ -5,14 +5,18 @@ import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js";
 import authRoutes from "./routes/auth.js";
 import voiceRoutes from "./routes/voice.js";
+import personaRoutes from "./routes/personas.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    exposedHeaders: ["X-Thread-Persona", "X-Thread-Persona-Name", "X-Thread-Title"]
+}));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/personas", personaRoutes);
 app.use("/api", chatRoutes);
 app.use("/api/voice", voiceRoutes);
 
@@ -28,4 +32,4 @@ const connectDB = async() => {
     } catch(err) {
         console.log("Failed to connect with Db", err);
     }
-}
+};

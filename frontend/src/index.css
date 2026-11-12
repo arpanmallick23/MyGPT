@@ -33,4 +33,42 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+}
+
+/* Slim, elegant modern dark/light scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(180, 180, 180, 0.25) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(180, 180, 180, 0.25);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(180, 180, 180, 0.45);
+}
+
+[data-theme="light"] * {
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.35);
 }

@@ -17,10 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.navbar span {
-    margin: 1rem 2rem;
+    box-sizing: border-box;
 }
 
 .userIconDiv {
@@ -37,6 +34,506 @@
     justify-content: center;
     cursor: pointer;
     color: #fff !important;
+}
+
+/* Compact Persona Selector in Navbar */
+.personaSelectorContainer {
+    position: relative;
+    margin: 1rem 2rem;
+}
+
+.personaPillBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px 12px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.personaPillBtn:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--accent-color);
+}
+
+.personaPillBtn.locked {
+    cursor: default;
+    opacity: 0.9;
+}
+
+.personaPillBtn.locked:hover {
+    border-color: var(--border-color);
+    background-color: var(--bg-card);
+}
+
+.personaPillIcon {
+    font-size: 0.82rem;
+    color: var(--accent-color);
+}
+
+.personaPillLabel {
+    color: var(--text-primary);
+}
+
+.personaChevron {
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    margin-left: 2px;
+}
+
+.personaLockedBadge {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    margin-left: 2px;
+}
+
+/* Persona Dropdown Menu */
+.personaDropdownMenu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 290px;
+    background-color: var(--bg-dropdown);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0px 10px 28px rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    text-align: left;
+    animation: fadeInMenu 0.15s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.personaMenuHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px 6px 8px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 4px;
+}
+
+.personaNotice {
+    font-size: 0.68rem;
+    color: var(--accent-color);
+    text-transform: none;
+}
+
+/* Scroll area for personas list */
+.personaMenuScrollArea {
+    max-height: 320px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: 2px;
+}
+
+.personaSectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    padding: 6px 8px 2px 8px;
+    opacity: 0.85;
+}
+
+.sectionLoadingIcon {
+    font-size: 0.68rem;
+    color: var(--accent-color);
+}
+
+.personaOptionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.personaOptionItem {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.12s ease;
+}
+
+.personaOptionItem:hover:not(.disabled) {
+    background-color: var(--bg-hover);
+}
+
+.personaOptionItem.selected {
+    background-color: var(--bg-hover);
+}
+
+.personaOptionItem.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.personaOptionIcon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-input);
+    color: var(--accent-color);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+}
+
+.personaOptionIcon.custom {
+    color: var(--accent-color);
+    background: var(--bg-input);
+}
+
+.personaOptionText {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.personaOptionName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.checkIcon {
+    font-size: 0.72rem;
+    color: var(--accent-color);
+}
+
+.personaOptionTagline {
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Edit & Delete Action Buttons */
+.personaItemActions {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    margin-left: 4px;
+}
+
+.personaOptionItem:hover .personaItemActions {
+    opacity: 1;
+}
+
+.personaActionBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.12s ease;
+}
+
+.personaActionBtn:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.personaActionBtn.danger:hover {
+    color: var(--danger-color) !important;
+    background: rgba(239, 68, 68, 0.15);
+}
+
+/* Empty Notice */
+.personaEmptyNotice {
+    padding: 8px 10px;
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+}
+
+/* Create Custom Persona Action Button */
+.personaCreateActionWrap {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-color);
+}
+
+.personaCreateBtn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 7px 10px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: 6px;
+    color: var(--accent-color);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+}
+
+.personaCreateBtn:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-color);
+    color: var(--text-primary);
+}
+
+.personaMenuFooter {
+    padding: 6px 8px 3px 8px;
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 4px;
+    text-align: center;
+}
+
+@keyframes fadeInMenu {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Delete Confirmation Dialog */
+.deleteConfirmBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2100;
+    padding: 1rem;
+    animation: fadeInMenu 0.15s ease;
+}
+
+.deleteConfirmCard {
+    background: var(--bg-dropdown);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 380px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.deleteConfirmHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.warningIcon {
+    color: #F59E0B;
+    font-size: 1.1rem;
+}
+
+.deleteConfirmHeader h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.deleteConfirmText {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.deleteConfirmText strong {
+    color: var(--text-primary);
+}
+
+.deleteConfirmAlert {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    color: var(--danger-color);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+}
+
+.deleteConfirmFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+}
+
+.deleteCancelBtn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+
+.deleteCancelBtn:hover:not(:disabled) {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.deleteActionBtn {
+    background: var(--danger-color);
+    border: 1px solid var(--border-color);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+
+.deleteActionBtn:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.deleteActionBtn:disabled,
+.deleteCancelBtn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Temporary Availability / Error Banner */
+.chatErrorBanner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px 16px;
+    margin: 0.5rem 1rem;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 10px;
+    box-sizing: border-box;
+    animation: fadeInMenu 0.2s ease;
+    text-align: left;
+}
+
+.chatErrorContent {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.chatErrorIcon {
+    color: var(--danger-color);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.chatErrorMessage {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.chatRetryBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent-color);
+    border: none;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.15s ease;
+}
+
+.chatRetryBtn:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.chatRetryBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.chatErrorDismissBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.chatErrorDismissBtn:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
 }
 
 /* chat input */
@@ -60,123 +557,162 @@
     padding: 0 1rem;
 }
 
-input {
+.inputBox input {
     width: 100%;
-    box-sizing: border-box;
-    border: none;
+    border: 1px solid var(--border-color);
     background-color: var(--bg-input);
     color: var(--text-primary);
-    padding: 20px;
-    padding-right: 95px;
-    font-size: 0.8rem;
-    border-radius: 14px;
-
-    box-shadow:
-        var(--shadow-color) 0 54px 55px,
-        var(--shadow-color) 0 -12px 30px,
-        var(--shadow-color) 0 4px 6px,
-        var(--shadow-color) 0 12px 3px,
-        var(--shadow-color) 0 -3px 5px;
+    padding: 18px 80px 18px 24px;
+    font-size: 15px;
+    font-family: inherit;
+    border-radius: 28px;
+    box-shadow: 0 0 15px var(--shadow-color);
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-input:focus {
-    outline: none;
+.inputBox input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.75;
+}
+
+.inputBox input:hover {
+    border-color: var(--border-color);
+}
+
+.inputBox input:focus {
+    border-color: var(--accent-color);
+    background-color: var(--bg-input);
 }
 
 #submit {
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-    font-size: 20px;
     position: absolute;
-    right: 25px;
+    right: calc(1rem + 15px);
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-#submit i:hover {
+#submit:hover {
     color: var(--text-primary);
+    background-color: var(--bg-hover);
 }
 
 #mic {
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-    font-size: 18px;
     position: absolute;
-    right: 65px;
+    right: calc(1rem + 50px);
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 #mic:hover {
     color: var(--text-primary);
+    background-color: var(--bg-hover);
 }
 
 #mic.recording {
-    color: var(--danger-color);
-    animation: pulse 1s infinite;
+    color: #ef4444;
+    animation: pulse 1.2s infinite;
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
 }
 
 .info {
-    font-size: 0.8rem;
+    font-size: 11px;
     padding: 0.5rem;
     color: var(--text-secondary);
 }
 
-/* dropdown css */
+/* dropdown */
 
 .dropDown {
     position: absolute;
     top: 4rem;
     right: 2rem;
-    width: 190px;
-
+    width: 210px;
     background-color: var(--bg-dropdown);
-    padding: 0.3rem 0.5rem;
-    border-radius: 6px;
+    padding: 6px;
+    border-radius: 10px;
     text-align: left;
     z-index: 1000;
-
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    border: solid 1px var(--border-color);
+    box-shadow: 0px 10px 28px rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--border-color);
+    animation: fadeInMenu 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .dropDownUser {
-    padding: 0.5rem 0.2rem;
-    font-size: 0.8rem;
-    color: var(--text-secondary) !important;
-    border-bottom: solid 1px var(--border-color);
-    margin-bottom: 0.3rem;
+    padding: 8px 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 4px;
     word-break: break-all;
+    line-height: 1.4;
+}
+
+.dropDownUser span,
+.dropDownUser small {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.74rem;
+    font-weight: 400;
+    margin-top: 2px;
 }
 
 .dropDownItem {
-    font-size: 0.9rem;
-    margin: 0.3rem 0rem;
-    padding: 0.5rem 0.2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--text-primary);
+    transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 .dropDownItem:hover {
     background-color: var(--bg-hover);
-    border-radius: 6px;
+    color: var(--text-primary);
+}
+
+.dropDownItem.danger:hover {
+    color: var(--danger-color) !important;
 }
 
 .themeToggle {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    color: var(--text-primary);
+}
+
+.themeToggle i {
+    font-size: 0.88rem;
+    color: var(--accent-color);
 }

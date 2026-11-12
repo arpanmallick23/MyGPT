@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect } from "react";
+import API_BASE_URL from "./apiConfig.js";
 
 export const AuthContext = createContext(null);
-
-const API_BASE = "https://mygpt-b2yj.onrender.com/api";
 
 export function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem("sigmagpt_token") || null);
@@ -21,7 +20,7 @@ export function AuthProvider({ children }) {
             }
 
             try {
-                const response = await fetch(`${API_BASE}/auth/me`, {
+                const response = await fetch(`${API_BASE_URL}/auth/me`, {
                     headers: { Authorization: `Bearer ${storedToken}` }
                 });
 
@@ -47,25 +46,30 @@ export function AuthProvider({ children }) {
     const signup = async (name, email, password) => {
         setAuthError("");
         try {
-            const response = await fetch(`${API_BASE}/auth/signup`, {
+            const response = await fetch(`${API_BASE_URL}/auth/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password })
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => ({}));
 
             if (!response.ok) {
-                setAuthError(data.error || "Failed to sign up");
+                setAuthError(data.error || "Failed to create account. Please check your details.");
                 return false;
             }
 
-            localStorage.setItem("sigmagpt_token", data.token);
-            setToken(data.token);
-            setUser(data.user);
-            return true;
+            if (data.token) {
+                localStorage.setItem("sigmagpt_token", data.token);
+                setToken(data.token);
+                setUser(data.user);
+                return true;
+            }
+
+            setAuthError("Registration succeeded but no authorization token was received.");
+            return false;
         } catch (err) {
-            setAuthError("Network error, please try again");
+            setAuthError("Network connection error. Please ensure the backend server is running.");
             return false;
         }
     };
@@ -73,25 +77,30 @@ export function AuthProvider({ children }) {
     const login = async (email, password) => {
         setAuthError("");
         try {
-            const response = await fetch(`${API_BASE}/auth/login`, {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => ({}));
 
             if (!response.ok) {
                 setAuthError(data.error || "Failed to log in");
                 return false;
             }
 
-            localStorage.setItem("sigmagpt_token", data.token);
-            setToken(data.token);
-            setUser(data.user);
-            return true;
+            if (data.token) {
+                localStorage.setItem("sigmagpt_token", data.token);
+                setToken(data.token);
+                setUser(data.user);
+                return true;
+            }
+
+            setAuthError("Authentication succeeded but no authorization token was received.");
+            return false;
         } catch (err) {
-            setAuthError("Network error, please try again");
+            setAuthError("Network connection error. Please ensure the backend server is running.");
             return false;
         }
     };
